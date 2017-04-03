@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="root">
+            <App></App>
+        </div>
+        <template id="App">
+            <div>
+                <h1>{{msg}}</h1>
+                <carpetas v-on:setCarpeta="setCarpeta"></carpetas>
+                <archivos></archivos>
+            </div>
+        </template>
+        <template id="carpetas">
+            <div>
+                <h2>Carpetas</h2>
+                <input type="text" v-model="carpeta" v-on:change="getCarpetas()">
+                <ul>
+                    <li v-for="item in items">
+                        <div v-on:click="setCarpeta(item)">{{item}}</div>
+                    </li>
+                </ul>
+            </div>
+        </template>
+        <template id="archivos">
+            <div>
+                <h2>Archivos</h2>
+                <input type="text" v-model="carpeta" v-on:change="getCarpetas()">
+                <ul>
+                    <li v-for="item in items">
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+        </template>
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/vue/dist/vue.js"></script>
+        <script src="js/player/app.js"></script>
+    </body>
+</html>

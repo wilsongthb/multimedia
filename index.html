@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container" id="app">
+            <title v-if="typeof archivo.titulo !== 'undefined'">MICAMU :: {{archivo.titulo}}</title>
+            <title v-else>MICAMU</title>
+            <div class="row">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h1><code>MI</code> <code>CA</code>rpeta de <code>MU</code>sica</h1>
+                    </div>
+                </div>
+            </div>    
+            <div class="row">
+                Config <input type="checkbox" v-model="show_config">
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3" v-show="show_config">
+                    <p>Carpeta: <input class="form-control" type="text" v-model="dir" v-on:change="listar_archivos"></p>
+                    <p>Cantidad <input type="number" v-model="cantidad" class="form-control" v-on:change="listar_archivos"></p>
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-md-8 col-lg-8" v-if="archivo">
+                    
+                    <div class="panel panel-primary">
+                          <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    {{archivo.ruta}}
+                                </h3>
+                          </div>
+                          <div class="panel-body">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object" :src="archivo.img[0]" alt="Image" width="300" height="300">
+                                    </a>
+                                    <div class="media-body">
+                                        <h3>{{archivo.titulo}}</h3>
+                                        <h4 class="media-heading">Artista: {{archivo.artista}}</h4>
+                                        <p>Genero: {{archivo.genero}}</p>
+                                        <p>Album: {{archivo.album}}</p>
+                                        <audio controls v-if="src_music" autoplay>
+                                            <source :src="archivo.ruta">
+                                            No soportado! :(
+                                        </audio>
+                                    </div>
+                                </div>
+                          </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <p>Total {{archivos.total}}</p>
+                    <ul class="list-group">
+                        <li class="list-group-item" style="cursor: pointer" v-for="a in archivos.data" v-on:click="info_archivo(dir+'/'+a)"><marquee behavior="alternate" direction="" scrolldelay="2000"><code>{{a}}</code></marquee></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="node_modules/vue/dist/vue.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
